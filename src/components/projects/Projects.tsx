@@ -1,0 +1,60 @@
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
+import { PROJECTS, SECTORS, type Project, type Sector } from '../../config/projects'
+import { useReveal } from '../../lib/useReveal'
+import StatsStrip from './StatsStrip'
+import ProjectCard from './ProjectCard'
+import ProjectDialog from './ProjectDialog'
+
+export default function Projects() {
+  const root = useRef<HTMLElement>(null), grid = useRef<HTMLDivElement>(null)
+  const [f, setF] = useState<Sector | 'all'>('all')
+  const [open, setOpen] = useState<Project | null>(null)
+  const [more, setMore] = useState(false)
+  const [mobile, setMobile] = useState(() => matchMedia('(max-width:767px)').matches)
+  useReveal(root)
+  useEffect(() => { const m = matchMedia('(max-width:767px)'), c = () => setMobile(m.matches); m.addEventListener('change', c); return () => m.removeEventListener('change', c) }, [])
+
+  const list = PROJECTS.filter(p => f === 'all' || p.sector === f)
+  const shown = mobile && !more && list.length > 6 ? list.slice(0, 6) : list
+  // Cards animate in whenever the filter changes (skipped for reduced motion and first paint)
+  const first = useRef(true)
+  useLayoutEffect(() => {
+    if (first.current) { first.current = false; return }
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    gsap.fromTo(grid.current!.children, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.05, ease: 'power2.out', clearProps: 'opacity,transform' })
+  }, [f])
+
+  const counts = (id: string) => id === 'all' ? PROJECTS.length : PROJECTS.filter(p => p.sector === id).length
+  return (
+    <section id="projects" ref={root} className="border-t border-[var(--line)] px-4 py-20 md:px-12">
+      <div className="mx-auto max-w-6xl">
+        <header className="rv max-w-[720px]" data-gaze>
+          <p className="font-mono text-xs tracking-[.16em] text-[var(--c-security-text)]">PROJECTS</p>
+          <h2 className="mt-2 font-head text-3xl font-bold leading-tight md:text-4xl">Delivered across Ethiopia, from bank branches to referral hospitals</h2>
+          <p className="mt-3 text-muted">A selection of completed work for banks, government bodies, universities, hospitals and NGOs. Select a project to see the systems we delivered.</p>
+        </header>
+
+        <StatsStrip />
+
+        <div role="group" aria-label="Filter projects by sector" data-gaze className="rv no-scrollbar -mx-4 mt-10 flex snap-x gap-2 overflow-x-auto px-4 pb-2 md:mx-0 md:flex-wrap md:overflow-visible md:px-0">
+          {SECTORS.map(s => (
+            <button key={s.id} type="button" aria-pressed={f === s.id} onClick={() => { setF(s.id); setMore(false) }}
+              className={`pfilter snap-start ${f === s.id ? 'is-on' : ''}`}>{s.label} <span className="opacity-60">{counts(s.id)}</span></button>
+          ))}
+        </div>
+
+        <div ref={grid} className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {shown.map(p => <ProjectCard key={p.id} p={p} onOpen={setOpen} />)}
+        </div>
+        <p className="sr-only" role="status">{list.length} projects shown</p>
+
+        {mobile && list.length > 6 && (
+          <button type="button" aria-expanded={more} onClick={() => setMore(v => !v)} className="btn o mt-6 w-full justify-center rounded-[14px]">{more ? 'Show fewer projects' : `Show all ${list.length} projects`}</button>
+        )}
+        <p className="mt-10 text-sm text-muted">Recommendation letters are available on request from clients including Wegagen Bank, Steely RMI, Asmen and Tilahun Abebe General Contractor.</p>
+      </div>
+      <ProjectDialog p={open} onClose={() => setOpen(null)} />
+    </section>
+  )
+}
