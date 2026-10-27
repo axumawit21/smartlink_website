@@ -24,3 +24,4 @@ export const ORG: OrgNode = { name: 'Manager', tone: 'top', kids: [
   { name: 'Sales and marketing', tone: 'sales' }, { name: 'Finance and administration', tone: 'fin' },
 ] }
 export const ORG_LEGEND: [string, string][] = [['#0B1F3A', 'Leadership'], ['#8B5CF6', 'Office support'], ['#0070C0', 'Technical'], ['#DB2777', 'Sales'], ['#CA8A04', 'Finance']]
+
