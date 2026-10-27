@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npx tsc --noEmit && npx vite build",
-    "preview": "vite preview",
-    "vercel-build": "npx tsc --noEmit && npx vite build"
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
