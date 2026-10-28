@@ -22,10 +22,6 @@ export default function Clients() {
         <ClientGroups />
         <Testimonials onOpen={setView} viewing={view !== null} />
         <PartnerWall />
-        <div className="rv mt-16 flex flex-col items-start justify-between gap-5 rounded-[20px] border border-white/15 bg-white/5 p-6 backdrop-blur md:flex-row md:items-center md:p-8" data-gaze>
-          <p className="max-w-xl font-head text-xl font-bold">Join the organizations that trust SmartLink with their networks and security.</p>
-          <a href="#contact" className="btn p shrink-0 rounded-[14px]">Get a Quote</a>
-        </div>
       </div>
       <LetterViewer index={view} onIndex={setView} />
     </section>

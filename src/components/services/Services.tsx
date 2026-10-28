@@ -89,7 +89,7 @@ export default function Services() {
         <div className="rv relative mt-6" style={vars(cat.pillar)}>
           <div aria-hidden="true" className="blob" />
           <div id="svc-panel" role="tabpanel" aria-labelledby={`tab-${cat.id}`} tabIndex={0} data-gaze
-            className="relative rounded-[20px] border border-[var(--line)] bg-[var(--surface)] p-6 md:p-10">
+            className="relative rounded-[20px] border border-[var(--line)] svc-card p-6 md:p-10">
             <div ref={wrap} className="grid gap-8 lg:grid-cols-[5fr_7fr] lg:gap-12">
               <div>
                 <h3 className="font-head text-2xl font-bold">{cat.title}</h3>
@@ -119,11 +119,6 @@ export default function Services() {
         </div>
 
         <HowWeWork />
-
-        <div className="rv mt-14 flex flex-col items-start justify-between gap-5 rounded-[20px] bg-[var(--surface-2)] p-6 md:flex-row md:items-center md:p-8" data-gaze>
-          <p className="max-w-xl font-head text-lg font-bold">Not sure what you need? Tell us about your site and we will recommend a solution.</p>
-          <a href="#contact" className="btn p shrink-0 rounded-[14px]">Get a Quote</a>
-        </div>
       </div>
     </section>
   )

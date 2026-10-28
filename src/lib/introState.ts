@@ -12,6 +12,9 @@ export const setIntroClass = (on: boolean) => document.documentElement.classList
 export const introClassOn = () => document.documentElement.classList.contains('intro')
 
 /** Resting pose: camera small on the RIGHT (top-right on narrow screens). World half-height at z=0 is ~2.52. */
-export const finalPose = (aspect: number) =>
-  aspect > 1 ? { x: 1.39 * aspect, y: 0, s: 0.6 } : { x: 1.3 * aspect, y: 1.1, s: 0.36 }
-export const placeFinal = (aspect: number) => Object.assign(pose, { rx: 0, ry: 0, z: 0, glow: 1 }, finalPose(aspect))
+export const finalPose = (aspect: number, h = 800) => {
+  if (aspect > 1) return { x: 1.3 * aspect, y: 0, s: 0.92 }   // desktop / landscape: right side, large
+  // Phones: camera sits above the headline (centre ~105px from the top), ~68px radius
+  return { x: 0.5 * 2.5226 * aspect, y: 2.5226 * (1 - 210 / h), s: Math.min(0.6, Math.max(0.35, 343 / h)) }
+}
+export const placeFinal = (aspect: number, h?: number) => Object.assign(pose, { rx: 0, ry: 0, z: 0, glow: 1 }, finalPose(aspect, h))

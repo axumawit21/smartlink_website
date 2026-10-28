@@ -6,7 +6,7 @@ const paths: Record<string, string> = {
   pin: 'M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.800 12 21 12 21zM12 12a2.500 2.500 0 1 0 0-5 2.500 2.500 0 0 0 0 5z',
   phone: 'M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z',
   mail: 'M3 6h18v12H3zM3 7l9 6.500L21 7',
-  globe: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18',
+  person: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21c0-4 3.500-7 8-7s8 3 8 7',
 }
 function Copy({ text, label }: { text: string; label: string }) {
   const [ok, setOk] = useState(false)
@@ -28,7 +28,7 @@ export default function ContactCards() {
       <Card tone="blue" icon="phone" title="Phone">{SITE.phones.map(p => <Row key={p} copy={p} label="phone number"><a className="hover:underline" href={`tel:${p.replace(/\s/g, '')}`}>{p}</a></Row>)}
         <p className="text-sm text-white/60">Fax {SITE.fax}</p></Card>
       <Card tone="orange" icon="mail" title="Email">{SITE.emails.map(m => <Row key={m} copy={m} label="email address"><a className="break-all hover:underline" href={`mailto:${m}`}>{m}</a></Row>)}</Card>
-      <Card tone="violet" icon="globe" title="Website"><p>{SITE.website}</p><p className="text-sm text-white/60">Managing Director: {SITE.managingDirector}</p></Card>
+      <Card tone="violet" icon="person" title="Managing Director"><p className="text-lg font-semibold">{SITE.managingDirector}</p></Card>
     </ul>
   )
 }

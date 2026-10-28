@@ -1,5 +1,5 @@
 /** Editable service catalogue. Source: SmartLink company profile. */
-export type Pillar = 'security' | 'safety' | 'communication' | 'neutral'
+export type Pillar = 'security' | 'safety' | 'communication' | 'violet' | 'cyan' | 'gold'
 export interface ServiceCategory { id: string; title: string; pillar: Pillar; summary: string; items: string[]; proof: string }
 
 export const SERVICES: ServiceCategory[] = [
@@ -15,15 +15,15 @@ export const SERVICES: ServiceCategory[] = [
     summary: 'Enterprise networks and communication infrastructure, from a single office to hundreds of branches.',
     items: ['Enterprise LAN and WAN', 'Wireless LAN', 'Fiber optic and structured cabling', 'IP telephony', 'Video conferencing', 'Network and performance management', 'Data center design and implementation', 'ISP and multimedia backbone design', 'VSAT solutions', 'Professional mobile radio (PMR) and TETRA'],
     proof: 'Wegagen Bank: data networks for 180+ branches' },
-  { id: 'software', title: 'Software & ERP', pillar: 'neutral',
+  { id: 'software', title: 'Software & ERP', pillar: 'violet',
     summary: 'Business software that automates how your organization runs.',
     items: ['Web-based ERP software', 'Customer relationship management', 'Corporate financial systems', 'Procurement and material management', 'Supply chain management', 'Messaging and collaboration solutions', 'Directory and identity solutions', 'Web design, hosting and domain names'],
     proof: 'Kality Food Share Company: ERP consultancy' },
-  { id: 'hardware', title: 'Hardware & IT Security', pillar: 'neutral',
+  { id: 'hardware', title: 'Hardware & IT Security', pillar: 'cyan',
     summary: 'The equipment and protection your systems run on.',
     items: ['Workstations', 'Servers', 'Storage (SAN and NAS)', 'Operating systems', 'IT security auditing', 'Network policies', 'Antivirus and anti-spam supply and implementation'],
     proof: 'Addis Ababa Trade & Industry Bureau: secured network infrastructure for 113 weredas' },
-  { id: 'support', title: 'Consultancy & Support', pillar: 'neutral',
+  { id: 'support', title: 'Consultancy & Support', pillar: 'gold',
     summary: 'Planning before the project and care after it.',
     items: ['Infrastructure consultancy', 'System requirement analysis', 'Hardware, software and application consultancy', 'IT security consultancy', 'Project management', 'Annual maintenance contracts'],
     proof: 'Annual maintenance and SLA support for enterprise clients' },

@@ -24,12 +24,12 @@ export default function Hero() {
     addEventListener('pointermove', onMove); addEventListener('keydown', onKey)
 
     const play = introClassOn() && !prefersReducedMotion()
-    if (!play) { setIntroClass(false); live.idle = true; placeFinal(aspect()); return () => { removeEventListener('pointermove', onMove); removeEventListener('keydown', onKey) } }
+    if (!play) { setIntroClass(false); live.idle = true; placeFinal(aspect(), root.current!.clientHeight); return () => { removeEventListener('pointermove', onMove); removeEventListener('keydown', onKey) } }
 
     live.idle = false
     const finish = () => {
       gsap.from('.copy > *, .proof', { opacity: 0, y: 14, stagger: 0.08, duration: 0.6 })
-      setIntroClass(false); live.idle = true; placeFinal(aspect()); markSeen()
+      setIntroClass(false); live.idle = true; placeFinal(aspect(), root.current!.clientHeight); markSeen()
     }
     const failsafe = setTimeout(() => { if (introClassOn()) finish() }, 12000)
 
@@ -54,7 +54,7 @@ export default function Hero() {
     t.to('#rec', { opacity: 1, duration: 0.2 }, 0).to('.grid-bg', { opacity: 1, duration: 0.6 }, 0.2)       // 0-0.8 REC + grid
       .to('#rec', { opacity: 0, duration: 0.3 }, 0.9)
       .to(cv, { opacity: 1, duration: 0.8 }, 0.8)                                                           // 0.8-2.6 emerge + 360 spin
-      .to(pose, { ry: 0, s: 1, duration: 1.8, ease: 'power3.out' }, 0.8)
+      .to(pose, { ry: 0, s: aspect() < 1 ? 0.72 : 1, duration: 1.8, ease: 'power3.out' }, 0.8)   // smaller on portrait phones so the dome fits
       .to(pose, { glow: 1, duration: 1.4, ease: 'steps(10)' }, 1.0)                                         // stepped ease = boot flicker
       .to(ht, { opacity: 1, duration: 0.1 }, 1.0).add(type(ht, 'SMARTLINK // SYSTEM BOOT', 1.2), 1.0)
       .to(['#brk', '#hs'], { opacity: 1, duration: 0.3 }, 2.6).add(type(hs, 'SCANNING...', 0.5), 2.6)       // 2.6-3.8 scan
@@ -72,7 +72,7 @@ export default function Hero() {
       .fromTo('#pan', { x: 60 }, { x: -60, duration: 0.9, ease: 'sine.inOut' }, 5.6)
       .to('.nd', { opacity: 1, stagger: 0.2, duration: 0.15 }, 5.65).to('.ro', { opacity: 1, stagger: 0.1, duration: 0.3 }, 5.6)
       .to('.ro', { opacity: 0, duration: 0.5 }, 6.5).to(inside, { opacity: 0.14, duration: 0.7 }, 6.5)      // HUD fades to background
-      .add(() => { placeFinal(aspect()) }, 6.5).to(cv, { opacity: 1, duration: 0.7 }, 6.5)                  // camera returns small, right side
+      .add(() => { placeFinal(aspect(), root.current!.clientHeight) }, 6.5).to(cv, { opacity: 1, duration: 0.7 }, 6.5)                  // camera returns small, right side
     if (isLowPower()) t.timeScale(7.2 / 3.5)                                                                // low-power: ~3.5s
     tl.current = t
 
@@ -87,7 +87,7 @@ export default function Hero() {
         <p className="eb">ICT &amp; SECURITY SOLUTIONS · ADDIS ABABA · SINCE 2008</p>
         <h1>Security, Safety &amp; Communication</h1>
         <p className="sub">Integrated security, safety and network systems for banks, government, NGOs and enterprises across Ethiopia.</p>
-        <div className="cta"><a className="btn p" href="#contact">Get a Quote</a><a className="btn o" href="#services">Explore Solutions</a></div>
+        <div className="cta"><a className="btn p" href="#services">Explore Solutions</a></div>
         <div className="chips">
           <a className="chip" href="#services?cat=security"><Icon d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z" />Security</a>
           <a className="chip" href="#services?cat=safety"><Icon d="M12 2c1 4 6 6 6 12a6 6 0 0 1-12 0c0-3 2-4 3-7 1 1 1 2 2 3 1-2 1-5 1-8z" />Safety</a>

@@ -17,7 +17,7 @@ export default function About() {
             <p className="mt-5 max-w-2xl text-white/85">SmartLink ICT &amp; Security Solutions PLC is an information technology company established to help businesses fully or partially automate their operations. From our main office in Addis Ababa we deliver consistent, high-quality IT services to major cities across Ethiopia, and we stay ahead of industry trends so we can always deliver the best possible results.</p>
           </div>
           <dl className="grid grid-cols-3 gap-3">
-            {FACTS.map(([v, l]) => <div key={l} className="bp-card p-4 text-center"><dd className="font-head text-xl font-bold text-[#FBBF24] md:text-2xl">{v}</dd><dt className="mt-1 text-xs text-white/80">{l}</dt></div>)}
+            {FACTS.map(([v, l]) => <div key={l} className="bp-card p-3 text-center sm:p-4"><dd className="font-head text-base font-bold text-[#FBBF24] sm:text-xl md:text-2xl">{v}</dd><dt className="mt-1 text-xs text-white/80">{l}</dt></div>)}
           </dl>
         </header>
 
@@ -47,11 +47,6 @@ export default function About() {
           <blockquote className="font-head text-2xl font-bold leading-snug md:text-4xl">We believe that successful IT projects are a team effort.</blockquote>
           <figcaption className="mt-3 font-mono text-xs tracking-widest text-white/75">SMARTLINK COMPANY PROFILE</figcaption>
         </figure>
-
-        <div className="rv mt-14 flex flex-col items-start justify-between gap-5 rounded-[20px] bg-white p-6 text-[#0A2447] md:flex-row md:items-center md:p-8" data-gaze>
-          <p className="max-w-xl font-head text-xl font-bold">Have a site to secure or a network to build? Let us talk about it.</p>
-          <a href="#contact" className="btn p shrink-0 rounded-[14px]">Get a Quote</a>
-        </div>
       </div>
     </section>
   )

@@ -11,7 +11,9 @@ export default function ProjectDialog({ p, onClose }: { p: Project | null; onClo
       className="m-auto w-[min(920px,94vw)] max-h-[92vh] overflow-y-auto rounded-[20px] border border-[var(--line)] bg-[var(--surface)] p-0 text-[var(--fg)] backdrop:bg-[rgba(5,11,22,.75)] backdrop:backdrop-blur-sm">
       {p && (
         <div>
-          {p.image && <img src={`${base}projects/${p.image}`} alt={`${p.title}, ${p.client}`} className={`max-h-[46vh] w-full object-cover ${p.id === 'ena' ? 'object-top' : ''}`} />}
+          {p.image && (
+            <div className="bg-[#050B16]"><img src={`${base}projects/${p.image}`} alt={`${p.title}, ${p.client}`} className="mx-auto block max-h-[62vh] w-full object-contain" /></div>
+          )}
           <div className="p-6 md:p-8">
             <div className="flex items-start justify-between gap-4">
               <div><p className="text-sm text-muted">{p.client}</p><h3 id="pd-title" className="mt-1 font-head text-2xl font-bold">{p.title}</h3></div>
@@ -24,7 +26,6 @@ export default function ProjectDialog({ p, onClose }: { p: Project | null; onClo
             <h4 className="mt-6 font-mono text-xs tracking-[.16em] text-[var(--c-security-text)]">SYSTEMS DELIVERED</h4>
             <ul className="mt-3 flex flex-wrap gap-2">{p.systems.map(s => <Chip key={s.label} {...s} />)}</ul>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href="#contact" onClick={onClose} className="btn p rounded-[14px] justify-center">Get a Quote</a>
               <button type="button" onClick={onClose} className="btn o rounded-[14px] justify-center">Back to projects</button>
             </div>
           </div>
